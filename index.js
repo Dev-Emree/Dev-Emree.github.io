@@ -15,3 +15,23 @@ import*as e from"https://unpkg.com/three@0.170.0/build/three.module.js";let scen
     <span class="key">return</span> <span class="str">"${translations[e].code_hire}"</span>;
   }
 };`;codeTyped=new Typed("#code-typewriter",{strings:[o],typeSpeed:30,backSpeed:0,loop:!1,contentType:"html",showCursor:!0}),document.querySelector(".current-lang").textContent=e.toUpperCase(),document.documentElement.lang=e}document.querySelectorAll(".lang-dropdown button").forEach(e=>{e.addEventListener("click",()=>{let t=e.getAttribute("data-lang");setLanguage(t)})}),setLanguage("en");
+
+// Back to Top functionality
+const backToTopButton = document.getElementById('back-to-top');
+
+if (backToTopButton) {
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      backToTopButton.classList.add('show');
+    } else {
+      backToTopButton.classList.remove('show');
+    }
+  });
+
+  backToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+}
