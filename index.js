@@ -16,7 +16,51 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));let baseGeometry=new
   <span class="func">hire</span>: <span class="key">function</span>() {
     <span class="key">return</span> <span class="str">"${translations[e].code_hire}"</span>;
   }
-};`;codeTyped=new Typed("#code-typewriter",{strings:[o],typeSpeed:30,backSpeed:0,loop:!1,contentType:"html",showCursor:!0}),document.querySelector(".current-lang").textContent=e.toUpperCase(),document.documentElement.lang=e}document.querySelectorAll(".lang-dropdown button").forEach(e=>{e.addEventListener("click",()=>{let t=e.getAttribute("data-lang");setLanguage(t)})}),setLanguage("en");
+};`;codeTyped=new Typed("#code-typewriter",{strings:[o],typeSpeed:30,backSpeed:0,loop:!1,contentType:"html",showCursor:!0});
+const flagClassMap = {
+    en: 'fi-gb',
+    tr: 'fi-tr',
+    ru: 'fi-ru',
+    it: 'fi-it',
+    fr: 'fi-fr',
+    de: 'fi-de'
+};
+const currentLangBtn = document.querySelector(".current-lang");
+if (currentLangBtn) {
+    const flagSpan = currentLangBtn.querySelector('.fi');
+    const textSpan = currentLangBtn.querySelectorAll('span')[1];
+    if (flagSpan) flagSpan.className = `fi ${flagClassMap[e]}`;
+    if (textSpan) textSpan.textContent = e.toUpperCase();
+}
+document.documentElement.lang=e
+}
+
+document.querySelectorAll(".lang-dropdown button").forEach(e=>{e.addEventListener("click",()=>{let t=e.getAttribute("data-lang");setLanguage(t)})}),setLanguage("en");
+
+// Language Dropdown Toggle
+const langSelector = document.querySelector('.lang-selector');
+const currentLangBtn = document.querySelector('.current-lang');
+
+if (langSelector && currentLangBtn) {
+    currentLangBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        langSelector.classList.toggle('active');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!langSelector.contains(e.target)) {
+            langSelector.classList.remove('active');
+        }
+    });
+
+    // Close dropdown when a language is selected
+    const langButtons = document.querySelectorAll('.lang-dropdown button');
+    langButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            langSelector.classList.remove('active');
+        });
+    });
+}
 
 // Back to Top functionality
 const backToTopButton = document.getElementById('back-to-top');
