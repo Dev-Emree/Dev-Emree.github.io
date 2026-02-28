@@ -45,11 +45,14 @@ if (langSelector && currentLangBtn) {
     currentLangBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         langSelector.classList.toggle('active');
+        const isActive = langSelector.classList.contains('active');
+        currentLangBtn.setAttribute('aria-expanded', isActive.toString());
     });
 
     document.addEventListener('click', (e) => {
         if (!langSelector.contains(e.target)) {
             langSelector.classList.remove('active');
+            currentLangBtn.setAttribute('aria-expanded', 'false');
         }
     });
 
@@ -58,6 +61,7 @@ if (langSelector && currentLangBtn) {
     langButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             langSelector.classList.remove('active');
+            currentLangBtn.setAttribute('aria-expanded', 'false');
         });
     });
 }
