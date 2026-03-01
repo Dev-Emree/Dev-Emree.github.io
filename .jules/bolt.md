@@ -1,0 +1,3 @@
+## 2024-05-18 - Prevent Layout Thrashing in WebGL Loops
+**Learning:** Querying DOM layout properties (like `getBoundingClientRect().top` or `scrollHeight`) synchronously inside a `requestAnimationFrame` loop causes severe layout thrashing because the browser is forced to recalculate layout on every frame.
+**Action:** Always cache these layout properties using passive event listeners (e.g., `scroll`, `resize`) and read the cached values inside the render loop to maintain 60 FPS without layout recalculations.
