@@ -64,6 +64,15 @@ if (langSelector && currentLangBtn) {
             currentLangBtn.setAttribute('aria-expanded', 'false');
         });
     });
+
+    // Close dropdown with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && langSelector.classList.contains('active')) {
+            langSelector.classList.remove('active');
+            currentLangBtn.setAttribute('aria-expanded', 'false');
+            currentLangBtn.focus();
+        }
+    });
 }
 
 // Back to Top functionality
