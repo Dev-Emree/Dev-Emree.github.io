@@ -14,7 +14,7 @@ document.addEventListener("mousemove",e=>{
 
 window.addEventListener("scroll", () => {
   cachedScrollY = window.scrollY;
-});
+}, { passive: true });
 
 let clock=new e.Clock;
 function animate(){
@@ -148,7 +148,7 @@ if (backToTopButton) {
     } else {
       backToTopButton.classList.remove('show');
     }
-  });
+  }, { passive: true });
 
   backToTopButton.addEventListener('click', () => {
     window.scrollTo({
