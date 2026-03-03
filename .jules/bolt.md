@@ -2,3 +2,7 @@
 ## 2026-02-28 - [Eliminate Layout Thrashing in Three.js Render Loop]
 **Learning:** Found a major performance bottleneck where querying `document.body.getBoundingClientRect().top` and `document.body.scrollHeight` inside `requestAnimationFrame` forces the browser to synchronously recalculate layouts 60 times a second (layout thrashing).
 **Action:** When working with scroll-linked animations in WebGL/Three.js render loops, ALWAYS cache layout properties like `scrollY`, `innerWidth`, `innerHeight` and `scrollHeight`, and update them via asynchronous `scroll` and `resize` event listeners instead of querying the DOM directly in the hot path.
+
+## 2026-03-03 - [Optimize DOM Queries and Passive Listeners for Scrolling]
+**Learning:** Identified a performance anti-pattern where a DOM query (`document.getElementById('header')`) was repeatedly executed inside a high-frequency `scroll` event listener. Furthermore, `scroll` event listeners lacked the `{ passive: true }` option, potentially causing scroll jank as the browser waits to see if the event's default action is prevented.
+**Action:** Always move DOM element references outside of high-frequency event handlers (like scroll or resize). Additionally, append `{ passive: true }` to `addEventListener('scroll', ...)` when the listener does not call `preventDefault()`, signaling to the browser that scrolling can proceed immediately on the compositor thread.
