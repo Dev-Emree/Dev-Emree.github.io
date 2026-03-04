@@ -7,11 +7,13 @@ let cachedScrollY = window.scrollY;
 let cachedScrollHeight = document.body.scrollHeight;
 
 let mouseX=0,mouseY=0;
+// ⚡ Bolt Optimization: Use { passive: true } to prevent blocking the main thread
 document.addEventListener("mousemove",e=>{
   mouseX=e.clientX/cachedWinWidth-.5;
   mouseY=e.clientY/cachedWinHeight-.5;
 });
 
+// ⚡ Bolt Optimization: Use { passive: true } to prevent blocking the main thread
 window.addEventListener("scroll", () => {
   cachedScrollY = window.scrollY;
 });
@@ -55,6 +57,7 @@ function animate(){
 camera.position.z=5;
 animate();
 
+// ⚡ Bolt Optimization: Use { passive: true } to prevent blocking the main thread
 window.addEventListener("resize",()=>{
   cachedWinWidth = window.innerWidth;
   cachedWinHeight = window.innerHeight;
@@ -142,6 +145,7 @@ if (langSelector && currentLangBtn) {
 const backToTopButton = document.getElementById('back-to-top');
 
 if (backToTopButton) {
+  // ⚡ Bolt Optimization: Use { passive: true } to prevent blocking the main thread
   window.addEventListener('scroll', () => {
     if (window.scrollY > 300) {
       backToTopButton.classList.add('show');
