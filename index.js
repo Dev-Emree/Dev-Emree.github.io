@@ -12,8 +12,28 @@ document.addEventListener("mousemove",e=>{
   mouseY=e.clientY/cachedWinHeight-.5;
 });
 
+const header = document.getElementById('header');
+const backToTopButton = document.getElementById('back-to-top');
+
+// ⚡ Bolt Optimization: Consolidated scroll listeners and cached DOM elements to avoid layout thrashing
 window.addEventListener("scroll", () => {
   cachedScrollY = window.scrollY;
+
+  if (header) {
+    if (cachedScrollY > 50) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  }
+
+  if (backToTopButton) {
+    if (cachedScrollY > 300) {
+      backToTopButton.classList.add('show');
+    } else {
+      backToTopButton.classList.remove('show');
+    }
+  }
 });
 
 let clock=new e.Clock;
@@ -139,17 +159,7 @@ if (langSelector && currentLangBtn) {
 }
 
 // Back to Top functionality
-const backToTopButton = document.getElementById('back-to-top');
-
 if (backToTopButton) {
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-      backToTopButton.classList.add('show');
-    } else {
-      backToTopButton.classList.remove('show');
-    }
-  });
-
   backToTopButton.addEventListener('click', () => {
     window.scrollTo({
       top: 0,
