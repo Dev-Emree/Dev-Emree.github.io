@@ -1,3 +1,6 @@
 ## 2024-05-14 - Custom Dropdown ARIA States
 **Learning:** Custom UI components in this app (like the language selector dropdown) often rely solely on CSS classes (e.g., `.active`) for state management, omitting crucial accessibility attributes (`aria-expanded`, `role="menu"`, etc.). This makes them invisible or confusing to screen reader users.
 **Action:** When working on or reviewing custom interactive components, always check for missing ARIA attributes and ensure JS state toggles also update their corresponding ARIA states (like `aria-expanded`).
+## 2024-05-24 - Focus Parity for Interactive Elements
+**Learning:** This app's custom interactive components (like `.project-card`, `.nav-links a`, `.btn.primary`, `.current-lang`, `#back-to-top`) rely heavily on `:hover` states for visual feedback (e.g., underlining, scaling, glows). However, they were missing equivalent keyboard focus indicators (`:focus-visible` or `:focus-within`), breaking visual parity for keyboard users.
+**Action:** When adding or updating interactive elements in this app, always explicitly pair their `:hover` pseudo-classes with `:focus-visible` (and `:focus-within` where applicable) to ensure accessible visual feedback without breaking the existing design system.
