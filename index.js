@@ -6,14 +6,35 @@ let cachedWinHeight = window.innerHeight;
 let cachedScrollY = window.scrollY;
 let cachedScrollHeight = document.body.scrollHeight;
 
+// Cache DOM elements for scroll event
+const headerElement = document.getElementById('header');
+const backToTopBtn = document.getElementById('back-to-top');
+
 let mouseX=0,mouseY=0;
 document.addEventListener("mousemove",e=>{
   mouseX=e.clientX/cachedWinWidth-.5;
   mouseY=e.clientY/cachedWinHeight-.5;
 });
 
+// Consolidate scroll event listeners and use cached variables
 window.addEventListener("scroll", () => {
   cachedScrollY = window.scrollY;
+
+  if (headerElement) {
+    if (cachedScrollY > 50) {
+      headerElement.classList.add('scrolled');
+    } else {
+      headerElement.classList.remove('scrolled');
+    }
+  }
+
+  if (backToTopBtn) {
+    if (cachedScrollY > 300) {
+      backToTopBtn.classList.add('show');
+    } else {
+      backToTopBtn.classList.remove('show');
+    }
+  }
 });
 
 let clock=new e.Clock;
@@ -138,19 +159,9 @@ if (langSelector && currentLangBtn) {
     });
 }
 
-// Back to Top functionality
-const backToTopButton = document.getElementById('back-to-top');
-
-if (backToTopButton) {
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-      backToTopButton.classList.add('show');
-    } else {
-      backToTopButton.classList.remove('show');
-    }
-  });
-
-  backToTopButton.addEventListener('click', () => {
+// Back to Top functionality (click handler)
+if (backToTopBtn) {
+  backToTopBtn.addEventListener('click', () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
