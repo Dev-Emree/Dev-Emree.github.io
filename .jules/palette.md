@@ -1,3 +1,3 @@
-## 2024-05-14 - Custom Dropdown ARIA States
-**Learning:** Custom UI components in this app (like the language selector dropdown) often rely solely on CSS classes (e.g., `.active`) for state management, omitting crucial accessibility attributes (`aria-expanded`, `role="menu"`, etc.). This makes them invisible or confusing to screen reader users.
-**Action:** When working on or reviewing custom interactive components, always check for missing ARIA attributes and ensure JS state toggles also update their corresponding ARIA states (like `aria-expanded`).
+## 2025-02-28 - External Links and Focus Consistency
+**Learning:** External links with `target="_blank"` inherently require `rel="noopener noreferrer"` for security, and ARIA labels. Wrapper elements containing localized children (`data-i18n`) cannot use hardcoded ARIA labels as it breaks client-side translations. Additionally, interactive CSS animations (like `.project-card:hover`) must be mapped to `:focus-within` to maintain parity for keyboard users.
+**Action:** Always add `rel="noopener noreferrer"` to external links. Avoid wrapper `aria-label` when inner elements are dynamically translated, and systematically extend `:hover` states to `:focus-within` for container elements and `:focus-visible` for individual buttons.
